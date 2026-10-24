@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8e9ef">
+<title>I Love You Ioanna ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink:#f8e9ef;
+  --rose:#d85e8b;
+  --dark:#55263d;
+  --ink:#533747;
+  --muted:#8d6b7c;
+  --paper:#fffdfd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-width:280px;min-height:100vh;
+  overflow-x:hidden;color:var(--ink);
+  font-family:"DM Sans",Arial,sans-serif;
+  background:
+    radial-gradient(ellipse at 8% 6%,#fff,transparent 34rem),
+    radial-gradient(ellipse at 95% 24%,#efb6cc66,transparent 32rem),
+    linear-gradient(145deg,#fff8fb,#fbeaf1 45%,#fff6f9);
+  -webkit-font-smoothing:antialiased;
+}
+button,input{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hidden{display:none!important}
+.ambient{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.floating-heart{
+  position:absolute;bottom:-40px;color:var(--rose);opacity:0;
+  animation:float 14s linear infinite
+}
+@keyframes float{
+  0%{transform:translateY(0);opacity:0}
+  15%{opacity:.22}
+  80%{opacity:.18}
+  100%{transform:translateY(-115vh) rotate(25deg);opacity:0}
+}
+.page-layer{position:relative;z-index:1}
+.lock-screen{
+  display:grid;min-height:100vh;min-height:100svh;
+  place-items:center;padding:18px 12px
+}
+.lock-shell{
+  width:min(100%,470px);padding:clamp(20px,5vw,36px);
+  border:1px solid #ffffffdd;border-radius:30px;
+  background:#fffdfdc9;box-shadow:0 18px 55px #6727451c;
+  backdrop-filter:blur(24px);animation:arrive .7s ease both
+}
+@keyframes arrive{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.lock-art-wrap{display:grid;place-items:center;min-height:185px;margin-bottom:10px}
+.bunny-art{width:min(100%,245px);height:190px;overflow:visible;filter:drop-shadow(0 8px 12px #67274514)}
+.bunny-float{transform-origin:center;animation:bunny-breathe 3.4s ease-in-out infinite}
+@keyframes bunny-breathe{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-5px) rotate(1deg)}
+}
+.bunny-heart{transform-origin:center;animation:heart-beat 1.7s ease-in-out infinite}
+@keyframes heart-beat{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.lock-mark{
+  display:grid;width:45px;height:45px;place-items:center;
+  margin:0 auto 12px;border:1px solid #d85e8b30;
+  border-radius:15px;color:#b84170;background:linear-gradient(145deg,#fff,#fcecf2);
+  font-size:25px
+}
+.lock-heading{
+  margin:0;color:var(--dark);font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(1.55rem,6vw,2.12rem);font-weight:600;
+  letter-spacing:-.035em;line-height:1.25;text-align:center
+}
+.lock-description{
+  max-width:330px;margin:12px auto 24px;color:var(--muted);
+  font-size:.94rem;line-height:1.8;text-align:center
+}
+.scratch-label{
+  display:block;margin-bottom:10px;color:#b84170;font-size:.76rem;
+  font-weight:700;letter-spacing:.15em;text-align:center;text-transform:uppercase
+}
+.scratch-area{
+  position:relative;width:min(100%,330px);height:104px;margin:auto;
+  overflow:hidden;border:1px solid #d85e8b40;border-radius:19px;
+  background:linear-gradient(135deg,#fff,#fcecf2);
+  isolation:isolate;touch-action:none
+}
+.secret-number{
+  position:absolute;inset:0;display:grid;place-items:center;
+  color:#b84170;font-size:clamp(2rem,8vw,2.55rem);
+  font-weight:700;letter-spacing:.36em;padding-left:.36em;
+  user-select:none;opacity:0;visibility:hidden;
+  transition:opacity .35s ease;pointer-events:none;z-index:0
+}
+.scratch-area.revealed .secret-number{
+  opacity:1;visibility:visible
+}
+#scratchCanvas{
+  position:absolute;inset:0;z-index:1;display:block;
+  width:100%;height:100%;touch-action:none;cursor:crosshair
+}
+.scratch-hint{margin:9px 0 19px;color:#a88998;font-size:.76rem;text-align:center}
+.password-label{display:block;margin:0 0 8px 2px;color:var(--dark);font-size:.82rem;font-weight:600}
+.password-input{
+  width:100%;min-height:54px;padding:14px 17px;
+  border:1px solid #b8417033;border-radius:15px;outline:none;
+  color:var(--dark);background:#ffffffd1;font-size:1rem;
+  letter-spacing:.12em;text-align:center
+}
+.password-input:focus{border-color:#e88eaf;box-shadow:0 0 0 4px #e88eaf24}
+.primary-button{
+  width:100%;min-height:55px;margin-top:12px;padding:14px 20px;
+  border:0;border-radius:15px;color:white;
+  background:linear-gradient(110deg,#e98eb0,#d85e8b 52%,#b84170);
+  box-shadow:0 10px 23px #b8417038;font-weight:700
+}
+.primary-button:active{transform:scale(.99)}
+.error-message{min-height:20px;margin:10px 0 0;color:#b52e5d;font-size:.82rem;text-align:center}
+
+.main-page{min-height:100vh;padding:clamp(24px,5vw,56px) 18px 34px}
+.main-container{width:min(100%,1000px);margin:auto}
+.page-kicker{margin:0 0 20px;color:#b84170;font-size:.9rem;text-align:center}
+.welcome-title{
+  max-width:850px;margin:auto;color:var(--dark);
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(2rem,6vw,4.2rem);font-weight:500;
+  letter-spacing:-.045em;line-height:1.14;text-align:center
+}
+.title-heart{color:var(--rose)}
+.welcome-subtitle{
+  max-width:610px;margin:19px auto 0;color:var(--muted);
+  font-size:clamp(.9rem,2.3vw,1rem);line-height:1.9;text-align:center
+}
+.section-divider{margin:34px auto 26px;color:#e88eaf;text-align:center}
+.envelopes{
+  display:grid;width:min(100%,850px);
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(12px,2vw,18px);margin:auto
+}
+.envelope-card{
+  min-width:0;padding:clamp(10px,2vw,16px);
+  border:1px solid #ffffffeb;border-radius:26px;
+  background:#fffdfdb0;box-shadow:0 10px 30px #67274517;
+  backdrop-filter:blur(14px);transition:transform .3s,box-shadow .3s
+}
+.envelope-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px #67274520}
+.envelope-button{
+  display:grid;width:100%;min-height:130px;place-items:center;padding:0;
+  border:0;border-radius:18px;background:radial-gradient(circle,#fff,#fcecf2)
+}
+.envelope-image{width:100%;height:clamp(100px,15vw,150px);object-fit:contain;padding:7px}
+
+.custom-envelope {
+  position: relative;
+  width: 100%;
+  height: clamp(100px, 15vw, 150px);
+  background: linear-gradient(135deg, #fff0f5, #ffd1dc);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 6px rgba(216,94,139,0.2);
+  overflow: hidden;
+}
+.custom-envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(145deg, #ffb6c1, #ff9eb5);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  box-shadow: 0 4px 10px rgba(103,39,69,0.1);
+}
+.custom-envelope-heart {
+  position: relative;
+  z-index: 2;
+  font-size: 2.2rem;
+  filter: drop-shadow(0 4px 8px rgba(103,39,69,0.25));
+  animation: heart-beat 1.7s ease-in-out infinite;
+}
+
+.envelope-label{
+  margin:12px 0 0;color:var(--dark);
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(.8rem,1.5vw,1.1rem);font-weight:600;
+  line-height:1.45;text-align:center;overflow-wrap:anywhere
+}
+.tap-hint{margin:7px 0 0;color:#a98294;font-size:.72rem;text-align:center}
+.footer-note{
+  margin:39px auto 0;color:var(--muted);
+  font-family:"Playfair Display",Georgia,serif;line-height:1.9;text-align:center
+}
+
+/* Letter windows */
+.modal{
+  position:fixed;z-index:20;inset:0;display:grid;place-items:center;
+  padding:8px;background:#32162588;backdrop-filter:blur(13px)
+}
+.letter{
+  display:flex;width:min(100%,760px);max-height:95svh;
+  flex-direction:column;overflow:hidden;border:1px solid #ffffffeb;
+  border-radius:24px;background:var(--paper);box-shadow:0 28px 100px #1f0a1645
+}
+.letter-topline{flex:none;height:5px;background:linear-gradient(90deg,#f4c5d6,#d85e8b,#f4c5d6)}
+.letter-header{
+  position:relative;flex:none;padding:24px 58px 20px;
+  border-bottom:1px solid #b841701c;background:linear-gradient(135deg,#fff8fb,#fceaf1);
+  text-align:center
+}
+.letter-header h2{
+  margin:0;color:var(--dark);font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(1.25rem,4vw,1.9rem);line-height:1.35
+}
+.letter-header p{margin:8px 0 0;color:#b84170;font-size:.78rem}
+.close-button{
+  position:absolute;z-index:3;top:12px;right:12px;width:40px;height:40px;
+  border:1px solid #b8417022;border-radius:50%;color:#b84170;
+  background:#ffffffdd;font-size:1.5rem
+}
+.letter-content{
+  overflow:auto;overscroll-behavior:contain;
+  padding:clamp(20px,5vw,42px) clamp(18px,6vw,54px) 36px;
+  color:#604354;font-size:clamp(.94rem,2vw,1.025rem);
+  line-height:2;white-space:normal
+}
+.letter-content p{margin:0 0 1.55em;white-space:pre-line;overflow-wrap:anywhere}
+.sticker-frame{
+  display:grid;min-height:150px;place-items:center;margin:20px auto 32px;
+  padding:12px;border:1px solid #d85e8b1a;border-radius:22px;
+  background:radial-gradient(ellipse,#fcecf2,#fffafc 72%)
+}
+.sticker{
+  width:min(65%,230px);max-height:220px;object-fit:contain;
+  filter:drop-shadow(0 10px 13px #6727451a);
+  animation:sticker-float 5s ease-in-out infinite
+}
+.sticker-small{width:min(56%,190px)}
+@keyframes sticker-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.original-emphasis{
+  color:#b84170;font-family:"Playfair Display",Georgia,serif;
+  font-size:1.12em;font-weight:700;line-height:1.8;text-align:center
+}
+.letter-signature{
+  margin-top:30px;padding-top:23px;border-top:1px solid #d85e8b2b;
+  color:#b84170;font-family:"Playfair Display",Georgia,serif;
+  font-size:1.15rem;font-weight:700;line-height:1.8;text-align:center;white-space:pre-line
+}
+
+/* Dedicated academy letter */
+.academy-header-art{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;width:100%;margin:0 auto 22px
+}
+.academy-header-art img{
+  width:clamp(75px,18vw,135px);height:clamp(75px,18vw,135px);
+  object-fit:contain;flex:0 1 30%
+}
+.academy-header-message{
+  flex:1;min-width:0;color:#b84170;
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(1rem,3.5vw,1.55rem);
+  font-weight:700;line-height:1.45;text-align:center
+}
+.academy-letter-body{font-size:clamp(.94rem,2vw,1.04rem);line-height:2}
+.academy-quote{
+  margin:25px 0;padding:20px 16px;border:1px solid #e8a3bc66;
+  border-radius:18px;color:#b84170;background:#fff4f8;
+  font-family:"Playfair Display",Georgia,serif;font-size:1.12rem;
+  font-weight:700;line-height:1.8;text-align:center
+}
+.academy-officer{
+  display:grid;place-items:center;margin:25px auto;
+  padding:12px;border-radius:22px;
+  background:radial-gradient(ellipse,#dff2f1,#f7fcfc 72%);
+}
+.academy-officer img{width:min(70%,230px);max-height:250px;object-fit:contain}
+.academy-ending{text-align:center;color:#b84170;font-weight:700}
+.academy-bottom-stickers{
+  display:flex;align-items:center;justify-content:center;gap:20px;
+  margin:28px auto 10px;padding:18px;border-radius:22px;
+  background:radial-gradient(ellipse,#fcecf2,#fffafc 72%)
+}
+.academy-bottom-stickers img{width:min(34%,145px);max-height:145px;object-fit:contain}
+
+/* Interactive Question Modal Styles */
+.question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.image-question-wrap {
+  position: relative;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+.image-question-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 15px rgba(103,39,69,0.15));
+}
+.question-overlay-text {
+  position: absolute;
+  top: 28%;
+  left: 15%;
+  width: 70%;
+  text-align: center;
+  color: var(--dark);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 0 5px;
+  word-break: break-word;
+}
+.question-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+}
+.q-btn {
+  padding: 12px 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+}
+.q-btn-yes {
+  background: linear-gradient(110deg, #51cf66, #2b8a3e);
+  color: white;
+}
+.q-btn-no {
+  background: linear-gradient(110deg, #ff6b6b, #c92a2a);
+  color: white;
+}
+.success-celebration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+.celebration-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  margin: 10px 0;
+}
+.celebration-grid img {
+  width: min(30%, 120px);
+  max-height: 130px;
+  object-fit: contain;
+  animation: sticker-float 4s ease-in-out infinite;
+}
+.celebration-main-img {
+  width: min(60%, 200px);
+  max-height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 15px #67274522);
+}
+
+@media(max-width:600px){
+  .lock-shell{padding:22px 18px 25px;border-radius:27px}
+  .lock-art-wrap{min-height:155px}
+  .bunny-art{height:160px}
+  .main-page{padding:31px 12px 28px}
+  .welcome-title{font-size:clamp(1.9rem,8.2vw,2.65rem)}
+  .envelopes{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .envelope-card{padding:8px 8px 13px;border-radius:20px}
+  .envelope-button{min-height:105px;border-radius:14px}
+  .envelope-image{height:105px;padding:3px}
+  .envelope-label{margin-top:10px;font-size:.9rem}
+  .tap-hint{font-size:.68rem}
+  .letter{border-radius:20px}
+  .letter-header{padding:22px 50px 18px}
+  .letter-content{padding:21px 18px 28px;font-size:.93rem;line-height:1.9}
+  .sticker-frame{min-height:125px;margin:15px auto 24px}
+  .sticker{max-height:175px}
+  .academy-header-art img{width:clamp(65px,19vw,105px);height:clamp(65px,19vw,105px)}
+}
+@media(max-width:350px){
+  .envelopes{grid-template-columns:1fr;width:min(100%,290px)}
+  .envelope-button{min-height:140px}
+  .envelope-image{height:135px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+
+<body>
+<div class="ambient" id="floatingHearts" aria-hidden="true"></div>
+
+<div class="page-layer">
+<section class="lock-screen" id="lockScreen">
+<div class="lock-shell">
+  <div class="lock-art-wrap">
+    <svg class="bunny-art" viewBox="0 0 240 200" role="img" aria-label="Cute white bunny hugging a pink heart">
+      <defs>
+        <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff"/>
+          <stop offset="1" stop-color="#fff7fa"/>
+        </linearGradient>
+        <linearGradient id="heartPink" x1="0" y1="0" x2=".8" y2="1">
+          <stop offset="0" stop-color="#ff9fbd"/>
+          <stop offset="1" stop-color="#e65e91"/>
+        </linearGradient>
+      </defs>
+      <g class="bunny-float" stroke="#d98b9a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M80 76 C57 45 61 10 81 8 C103 7 111 43 112 68" fill="url(#fur)"/>
+        <path d="M130 66 C133 35 147 1 166 8 C187 17 174 54 153 78" fill="url(#fur)"/>
+        <path d="M77 34 C78 18 83 14 89 21 C97 32 98 45 104 58" fill="#ffc5d7" stroke="none"/>
+        <path d="M145 61 C151 36 161 19 169 23 C178 30 163 52 151 66" fill="#ffc5d7" stroke="none"/>
+        <path d="M61 96 C61 66 83 49 116 48 C149 48 174 70 177 101 C180 129 161 146 120 149 C81 149 60 127 61 96Z" fill="url(#fur)"/>
+        <ellipse cx="119" cy="151" rx="53" ry="35" fill="url(#fur)"/>
+        <ellipse cx="85" cy="169" rx="21" ry="12" fill="#fff"/>
+        <ellipse cx="148" cy="169" rx="22" ry="12" fill="#fff"/>
+        <ellipse cx="94" cy="95" rx="5.2" ry="7" fill="#63333f" stroke="none"/>
+        <ellipse cx="143" cy="95" rx="5.2" ry="7" fill="#63333f" stroke="none"/>
+        <circle cx="95" cy="93" r="1.7" fill="#fff" stroke="none"/>
+        <circle cx="144" cy="93" r="1.7" fill="#fff" stroke="none"/>
+        <ellipse cx="79" cy="109" rx="10" ry="5.5" fill="#ffb6c9" opacity=".7" stroke="none"/>
+        <ellipse cx="158" cy="109" rx="10" ry="5.5" fill="#ffb6c9" opacity=".7" stroke="none"/>
+        <path d="M115 106 Q120 111 125 106 Q122 116 116 113" fill="#ef8aa8"/>
+        <path d="M120 113 Q115 120 109 116 M120 113 Q126 120 131 116" fill="none"/>
+        <g class="bunny-heart" stroke="#d85e8b" stroke-width="1.8">
+          <path d="M119 151 C108 142 83 126 86 111 C88 97 106 97 119 112 C132 97 150 98 152 112 C155 128 131 144 119 151Z" fill="url(#heartPink)"/>
+          <path d="M99 112 Q101 106 108 111" fill="none" stroke="#ffdbe6"/>
+        </g>
+        <path d="M82 127 C68 117 60 127 68 139 C73 145 83 143 91 135" fill="url(#fur)"/>
+        <path d="M153 130 C169 117 178 130 168 141 C163 147 153 144 147 137" fill="url(#fur)"/>
+        <path d="M137 149 C153 148 163 159 157 169 C153 177 137 176 130 165" fill="url(#fur)"/>
+        <ellipse cx="143" cy="166" rx="5" ry="6" fill="#ffc5d7" stroke="none"/>
+      </g>
+      <g fill="#e86d99">
+        <path d="M42 63 C33 53 21 63 29 73 L42 84 L54 72 C62 61 49 53 42 63Z"/>
+        <path d="M190 105 C183 97 174 104 180 112 L190 121 L200 112 C207 103 196 97 190 105Z"/>
+      </g>
+      <g fill="none" stroke="#e88eaf" stroke-width="2.5" stroke-linecap="round">
+        <path d="M53 32 C47 25 38 31 43 38 L52 45 L61 36 C66 28 57 25 53 32Z"/>
+        <path d="M195 55 C188 46 177 54 183 63 L194 72 L205 62 C211 52 200 47 195 55Z"/>
+        <path d="M35 117 C29 110 20 116 25 123 L34 130 L43 122 C48 114 39 110 35 117Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="lock-mark" aria-hidden="true">♡</div>
+  <h1 class="lock-heading">Enter your password my beautiful cutie ❤️</h1>
+  <p class="lock-description">My little baby, scratch the pink card to discover your secret password 🥺💕</p>
+
+  <label class="scratch-label" for="scratchCanvas">✨ Scratch here, my love ✨</label>
+  <div class="scratch-area" id="scratchArea">
+    <div class="secret-number" aria-label="Secret number 212006">212006</div>
+    <canvas id="scratchCanvas" aria-label="Scratch the card to reveal the secret number"></canvas>
+  </div>
+  <p class="scratch-hint">Use your finger to scratch the card 💞</p>
+
+  <form id="passwordForm">
+    <label class="password-label" for="passwordInput">Password</label>
+    <input class="password-input" id="passwordInput" type="password" inputmode="numeric" autocomplete="off" placeholder="Enter the secret password" required>
+    <button class="primary-button" type="submit">Open my heart ❤️</button>
+  </form>
+  <p class="error-message" id="errorMessage" role="status" aria-live="polite"></p>
+</div>
+</section>
+
+<main class="main-page hidden" id="mainPage">
+<div class="main-container">
+  <p class="page-kicker">♡</p>
+  <h1 class="welcome-title">Ioanna = my love, my family, my best friend, my support <span class="title-heart">❤️</span></h1>
+  <p class="welcome-subtitle">
+    To my beautiful little baby, my Psyche mou 💗
+    <br>I made these little letters just for you.
+    Open them whenever you want to remember how much I love you. 💕
+  </p>
+  <div class="section-divider" aria-hidden="true">♡</div>
+
+  <section class="envelopes" aria-label="Love letters">
+    <article class="envelope-card">
+      <button class="envelope-button" type="button" data-open-letter="letterOne" aria-label="Open the letter for my heart Ioanna">
+        <img class="envelope-image" src="message1.png" alt="First love letter envelope">
+      </button>
+      <p class="envelope-label">For my heart ioanna ❤️</p>
+      <p class="tap-hint">♡ Tap to open 💌</p>
+    </article>
+
+    <article class="envelope-card">
+      <button class="envelope-button" type="button" data-open-letter="letterTwo" aria-label="Open the second love message">
+        <img class="envelope-image" src="message2.png" alt="Second love letter envelope">
+      </button>
+      <p class="envelope-label">read it good malaka ❤️</p>
+      <p class="tap-hint">♡ A little more love 💌</p>
+    </article>
+
+    <article class="envelope-card">
+      <button class="envelope-button" type="button" data-open-letter="academyLetter" aria-label="Open the academy message">
+        <img class="envelope-image" src="police1.png" alt="Cute police officer girl">
+      </button>
+      <p class="envelope-label">read it good malaka ❤️</p>
+      <p class="tap-hint">♡ This message for the academy 💌</p>
+    </article>
+
+    <article class="envelope-card">
+      <button class="envelope-button" type="button" data-open-letter="questionLetter" aria-label="Open the special question">
+        <div class="custom-envelope">
+          <span class="custom-envelope-heart">💖</span>
+        </div>
+      </button>
+      <p class="envelope-label">A special question ❤️</p>
+      <p class="tap-hint">♡ Open for a surprise 💌</p>
+    </article>
+  </section>
+
+  <p class="footer-note">Made with all my heart, only for you. 💗<br>I love you, my beautiful Ioanna. Forever and always. ❤️</p>
+</div>
+</main>
+</div>
+
+<!-- FIRST LETTER -->
+<section class="modal hidden" id="letterOne" role="dialog" aria-modal="true" aria-labelledby="letterOneTitle">
+<article class="letter">
+  <div class="letter-topline"></div>
+  <button class="close-button" type="button" data-close-letter aria-label="Close letter">×</button>
+  <header class="letter-header">
+    <h2 id="letterOneTitle">I'm telling you my feelings from my heart my little baby ❤️</h2>
+    <p>For my one and only Ioanna 💗</p>
+  </header>
+
+  <div class="letter-content" tabindex="0">
+    <div class="sticker-frame">
+      <img class="sticker sticker-small" src="blue-penguin-holding-sign-saying-i-love-you-5zrdr7r4c0r2nwft.webp" alt="Blue penguin holding an I love you sign">
+    </div>
+
+    <p>Cutieeeeeeee I love you so much I swear to you my heart beats for you all the time 🥺❤️
+When I look at your sweet cute beautiful face I get lost in your beautiful eyes and I feel my heart beats fast and everything tells me you are everything for me I love everything about you ioanna look at youuuu❤️ sooo beautiful so attractive so cute so funny so smart so kind so awesome 💞 I love everything about you every detail about you I love it I love your cute taste I love when you talk to me and tell me everything about you and your news and what you love you are so beautiful when you talk or when you try to annoy me I adore you 💓 I love your cute beautiful voice it goes to my mind and makes me happy it's my favourite thing to hear all the time 💗 I love how you talk and how you joke ioanna:,) you are really so beautiful and awesome I love everything you collect and love I love your eyes I love your beautiful lips and your beautiful hair and it's colour I love how you look and your face from the moment I saw it and forever I only see it beautiful from the moment I knew you I hear the word beautiful i remember you and I don't even need to hear it to remember u because you are always in my mind and my heart ❤️ I love your body it's so attractive and I love it alot I love you
+💕 my ioannnaaaa 💕
+You are so perfect my love I swear to you I'm so happy with you and I always thank god that I have you I'm so lucky to have you and I want you forever with me and I'll always love you I'm so proud of you I want to shout and say yeeee this is my beautiful girl you should be jealous 💅🏼 and I'm happy that you are mine Psyche mou💗 my heart belongs to you and I'll always take care of you and love you and I'll always protect you and support you Because you are my treasure in life, and you are more important than my life itself💕
+I always remember what we did together and I remember everything about you:) it makes me happy you are my beautiful girl I want to be close to god with you I want to have you all my life kardia mou 💗💓</p>
+
+    <div class="sticker-frame">
+      <img class="sticker" src="cartoon-cat-with-hearts-ie5exn3gdr7ofau8.webp" alt="Cute cartoon cat surrounded by hearts">
+    </div>
+
+    <p class="original-emphasis">You are my other half ❤️
+YOU COMPLETE ME 💗
+YOU LOVE EVERYTHING I LOVE YOU HAVE ALOT OF THINGS THE SAME WE ARE SO BEAUTIFUL TOGETHER:,)
+I LOVE LOVING YOU ❤️
+SAGAPO PSYCHE MOU POLY ❤️
+FOR MY BEAUTIFUL LOVE FOR MY FAMILY FOR MY BEST FRIEND FOR MY SUPPORT AND MY SOUL
+💞IOANNA FOTAKI 💞</p>
+
+    <div class="sticker-frame">
+      <img class="sticker" src="man-and-woman-kissing-saying-i-love-you-1rr4b92fuhfmjrfe.webp" alt="Romantic couple embracing">
+    </div>
+  </div>
+</article>
+</section>
+
+<!-- SECOND LETTER -->
+<section class="modal hidden" id="letterTwo" role="dialog" aria-modal="true" aria-labelledby="letterTwoTitle">
+<article class="letter">
+  <div class="letter-topline"></div>
+  <button class="close-button" type="button" data-close-letter aria-label="Close letter">×</button>
+  <header class="letter-header">
+    <h2 id="letterTwoTitle">Message for my love ❤️</h2>
+    <p>For my favourite person 💌</p>
+  </header>
+  <div class="letter-content" tabindex="0">
+    <p>My beautiful Ioanna, my Psyche mou 🥺❤️</p>
+    <p>If you are reading this, I want you to remember that you are loved more than words could ever explain.</p>
+    <p>No matter how your day goes, I hope you always remember that you have someone who cares about you, believes in you, supports you, and wants to see you happy.</p>
+    <p>You are my love, my family, my best friend, my support, and my favourite person. I want to share my little moments, my biggest dreams, and my whole life with you.</p>
+    <p>Whenever you miss me, imagine me holding you close and giving you the biggest hug. I wish I could be beside you right now. 🫂💞</p>
+
+    <div class="sticker-frame">
+      <img class="sticker" src="man-and-woman-kissing-saying-i-love-you-1rr4b92fuhfmjrfe.webp" alt="A loving embrace">
+    </div>
+
+    <p>I love you today, tomorrow, and every day after that.</p>
+    <p class="original-emphasis">You're my always, my little baby. ❤️</p>
+    <div class="letter-signature">SAGAPO POLY, IOANNA ❤️</div>
+  </div>
+</article>
+</section>
+
+<!-- THIRD LETTER: ACADEMY -->
+<section class="modal hidden" id="academyLetter" role="dialog" aria-modal="true" aria-labelledby="academyTitle">
+<article class="letter">
+  <div class="letter-topline"></div>
+  <button class="close-button" type="button" data-close-letter aria-label="Close academy message">×</button>
+
+  <header class="letter-header">
+    <h2 id="academyTitle">read it good malaka ❤️</h2>
+    <p>This message for the academy:)</p>
+  </header>
+
+  <div class="letter-content academy-letter-body" tabindex="0">
+    <div class="academy-header-art">
+      <img src="blue-penguin-holding-sign-saying-i-love-you-5zrdr7r4c0r2nwft.webp" alt="Blue penguin holding an I love you sign">
+      <div class="academy-header-message">This message for the academy:)</div>
+      <img src="police2.png" alt="My cute future police officer">
+    </div>
+
+    <p>Look cutie I really understand how you feel about the academy and you feel sad and annoyed because you will be far but only remember one thing my love</p>
+
+    <div class="academy-quote">(To get what you truly want and love you have to suffer for it)</div>
+
+    <p>Yes nothing comes easy cutie even look at us you are far from me we are suffering but we will do our best to be together my hand in your hand we will make everything beautiful but the hard times still here yk it's the same you will be the best police officer even you are my upper 💅🏼 and everything will be okay it just needs time my heart ❤️ DW just try to focus the good things not the bad things you were in hard things all your life and you are better than any male and I believe in you I'm so proud of you cutie and I won't ever leave you alone we will pass time together we will get whatever we want I'll support you don't worry you will have me in your back and I'll always come to you💕💗 just take the training it's something for your body to get stronger and those things makes your personality more stronger it's just a time and it will pass and I'm always with you ❤️ just focus on the small bright point in the darkness you can do this cutie I believe in you my love it will pass like the first time and I'll always help you 💕</p>
+
+    <p class="academy-ending">I love you ioanna I just wanted to tell u those things because they are true :)</p>
+
+    <div class="academy-officer">
+      <img src="police1.png" alt="Cute police officer girl">
+    </div>
+
+    <div class="academy-bottom-stickers">
+      <img src="blue-penguin-holding-sign-saying-i-love-you-5zrdr7r4c0r2nwft.webp" alt="Penguin saying I love you">
+      <span style="font-size:2rem" aria-label="Pink hearts">💕💗❤️</span>
+    </div>
+  </div>
+</article>
+</section>
+
+<!-- FOURTH MODAL: SPECIAL QUESTION -->
+<section class="modal hidden" id="questionLetter" role="dialog" aria-modal="true" aria-labelledby="questionTitle">
+<article class="letter">
+  <div class="letter-topline"></div>
+  <button class="close-button" type="button" data-close-letter aria-label="Close question message">×</button>
+
+  <header class="letter-header">
+    <h2 id="questionTitle">A question for my cutie ❤️</h2>
+    <p>Choose wisely my love 💌</p>
+  </header>
+
+  <div class="letter-content" tabindex="0">
+    <div id="questionStage" class="question-container">
+      <div class="image-question-wrap">
+        <img src="yesandno.png" alt="Holding sign question">
+        <div class="question-overlay-text">Can you be mine forever?🙄❤️</div>
+      </div>
+      <div class="question-buttons" id="questionButtons">
+        <button type="button" class="q-btn q-btn-yes" id="yesBtn">Yes ❤️</button>
+        <button type="button" class="q-btn q-btn-no" id="noBtn">No 💔</button>
+      </div>
+    </div>
+
+    <div id="celebrationStage" class="hidden success-celebration">
+      <div class="academy-header-art" style="margin-bottom:10px;">
+        <img src="cartoon-cat-with-pink-ear-paw-up-h479oxmn018ogdjq.webp" alt="Dancing cat left">
+        <img src="penguin-hanging-from-balloon-saying-i-love-you-uvfd0du4voh5asxf.webp" alt="Penguin top">
+        <img src="cartoon-cat-with-pink-ear-paw-up-h479oxmn018ogdjq.webp" alt="Dancing cat right" style="transform: scaleX(-1);">
+      </div>
+
+      <div style="text-align:center; margin: 10px auto;">
+        <img class="celebration-main-img" src="willumarryme.png" alt="Proposing character with ring">
+      </div>
+
+      <p class="original-emphasis" style="margin-top:15px;">
+        sagapo psyche mou poly ❤️♥️<br>
+        I'm so lucky to have you my cutieee 🥺<br>
+        I'm so happy you said yes ❤️
+      </p>
+    </div>
+  </div>
+</article>
+</section>
+
+<script>
+"use strict";
+
+const heartsContainer = document.getElementById("floatingHearts");
+const heartSymbols = ["♡","♥","♡","♥","✧"];
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  for (let i = 0; i < 17; i++) {
+    const h = document.createElement("span");
+    h.className = "floating-heart";
+    h.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+    h.style.left = Math.random() * 100 + "%";
+    h.style.fontSize = (12 + Math.random() * 18) + "px";
+    h.style.animationDuration = (12 + Math.random() * 13) + "s";
+    h.style.animationDelay = (-Math.random() * 20) + "s";
+    heartsContainer.appendChild(h);
+  }
+}
+
+const canvas = document.getElementById("scratchCanvas");
+const area = document.getElementById("scratchArea");
+const ctx = canvas.getContext("2d", { willReadFrequently: true });
+
+let scratching = false;
+let revealed = false;
+let lastX = null;
+let lastY = null;
+let resizeTimer = null;
+
+function setupScratch() {
+  if (revealed || scratching) return;
+
+  const rect = area.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = Math.round(rect.width * dpr);
+  canvas.height = Math.round(rect.height * dpr);
+  canvas.style.width = rect.width + "px";
+  canvas.style.height = rect.height + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.globalCompositeOperation = "source-over";
+
+  const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+  gradient.addColorStop(0, "#f9dce7");
+  gradient.addColorStop(0.5, "#f1b6cc");
+  gradient.addColorStop(1, "#e88eaf");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, rect.width, rect.height);
+
+  ctx.fillStyle = "rgba(125,47,79,0.85)";
+  ctx.font = "600 12px Arial, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("SCRATCH TO REVEAL ♡", rect.width / 2, rect.height / 2);
+
+  ctx.globalCompositeOperation = "destination-out";
+}
+
+function revealPassword() {
+  if (revealed) return;
+
+  revealed = true;
+  scratching = false;
+  area.classList.add("revealed");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvas.style.pointerEvents = "none";
+  canvas.setAttribute("aria-label", "Secret password revealed: 212006");
+}
+
+function getPoint(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
+  };
+}
+
+function startScratch(event) {
+  if (revealed) return;
+
+  event.preventDefault();
+  scratching = true;
+  lastX = null;
+  lastY = null;
+
+  try {
+    canvas.setPointerCapture(event.pointerId);
+  } catch (error) {}
+
+  scratch(event);
+}
+
+function scratch(event) {
+  if (!scratching || revealed) return;
+
+  event.preventDefault();
+  const point = getPoint(event);
+
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.lineWidth = 38;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  ctx.beginPath();
+
+  if (lastX === null || lastY === null) {
+    ctx.moveTo(point.x, point.y);
+    ctx.lineTo(point.x + 0.1, point.y + 0.1);
+  } else {
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(point.x, point.y);
+  }
+
+  ctx.stroke();
+
+  lastX = point.x;
+  lastY = point.y;
+}
+
+function checkScratchProgress() {
+  if (revealed || !canvas.width || !canvas.height) return;
+
+  try {
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let clearPixels = 0;
+    let sampledPixels = 0;
+
+    for (let i = 3; i < pixels.length; i += 4 * 12) {
+      sampledPixels++;
+      if (pixels[i] < 100) clearPixels++;
+    }
+
+    if (sampledPixels && clearPixels / sampledPixels >= 0.35) {
+      revealPassword();
+    }
+  } catch (error) {
+    console.error("Could not check scratch progress:", error);
+  }
+}
+
+function stopScratch() {
+  if (!scratching) return;
+
+  scratching = false;
+  lastX = null;
+  lastY = null;
+  checkScratchProgress();
+}
+
+canvas.addEventListener("pointerdown", startScratch);
+canvas.addEventListener("pointermove", scratch);
+canvas.addEventListener("pointerup", stopScratch);
+canvas.addEventListener("pointercancel", stopScratch);
+canvas.addEventListener("lostpointercapture", stopScratch);
+
+window.addEventListener("load", setupScratch);
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(setupScratch, 150);
+});
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupScratch, { once: true });
+} else {
+  requestAnimationFrame(setupScratch);
+}
+
+const form = document.getElementById("passwordForm");
+const input = document.getElementById("passwordInput");
+const error = document.getElementById("errorMessage");
+const lock = document.getElementById("lockScreen");
+const main = document.getElementById("mainPage");
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (input.value.trim() === "212006") {
+    lock.classList.add("hidden");
+    main.classList.remove("hidden");
+    error.textContent = "";
+    input.value = "";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const firstButton = main.querySelector(".envelope-button");
+    if (firstButton) firstButton.focus({ preventScroll: true });
+  } else {
+    error.textContent = "Oops, my baby 🥺 Try the secret number again! ❤️";
+    input.value = "";
+    input.focus();
+  }
+});
+
+let noClickCount = 0;
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const questionStage = document.getElementById("questionStage");
+const celebrationStage = document.getElementById("celebrationStage");
+
+function triggerCelebration() {
+  questionStage.classList.add("hidden");
+  celebrationStage.classList.remove("hidden");
+}
+
+yesBtn.addEventListener("click", triggerCelebration);
+
+noBtn.addEventListener("click", () => {
+  noClickCount++;
+  if (noClickCount === 1) {
+    noBtn.textContent = "Think again about it malaka";
+  } else if (noClickCount === 2) {
+    noBtn.textContent = "Think again I love you 🥺";
+  } else {
+    noBtn.textContent = "Yeye Malaka you are mine🔫";
+    noBtn.style.background = "linear-gradient(110deg, #51cf66, #2b8a3e)";
+    noBtn.replaceWith(noBtn.cloneNode(true));
+    const newNoBtn = document.getElementById("noBtn");
+    newNoBtn.addEventListener("click", triggerCelebration);
+  }
+});
+
+let lastFocus = null;
+
+function openLetter(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+
+  lastFocus = document.activeElement;
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  const content = modal.querySelector(".letter-content");
+  if (content) content.scrollTop = 0;
+
+  const closeButton = modal.querySelector(".close-button");
+  if (closeButton) closeButton.focus();
+}
+
+function closeLetter(modal) {
+  if (!modal) return;
+
+  modal.classList.add("hidden");
+
+  if (!document.querySelector(".modal:not(.hidden)")) {
+    document.body.style.overflow = "";
+
+    if (lastFocus && typeof lastFocus.focus === "function") {
+      lastFocus.focus({ preventScroll: true });
+    }
+  }
+}
+
+document.querySelectorAll("[data-open-letter]").forEach(button => {
+  button.addEventListener("click", () => {
+    openLetter(button.dataset.openLetter);
+  });
+});
+
+document.querySelectorAll("[data-close-letter]").forEach(button => {
+  button.addEventListener("click", () => {
+    closeLetter(button.closest(".modal"));
+  });
+});
+
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", event => {
+    if (event.target === modal) closeLetter(modal);
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    const openModals = document.querySelectorAll(".modal:not(.hidden)");
+    if (openModals.length) closeLetter(openModals[openModals.length - 1]);
+  }
+});
+</script>
+</body>
+</html>
